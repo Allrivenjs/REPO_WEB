@@ -1,0 +1,6 @@
+App de JAIME ANDRES RUIZ MELENDRES.
+
+Para poder ejecutar esta app, necesitas tener la aplicacion laragon instalada, https://laragon.org/, y ejecutar en la consola de laragon
+php artisan serve, estando en la carpeta del protecto /aviones, antes de eso ejecutar los servicios de apache y MySQL que estan en laragon por defecto, he irse al puerto que demande el host, o en su defecto luego de ejecutar  php artisan serve, le saldra el puerto donde se esta ejecutando la app.
+
+el archivo comprimido avionesBase de datos, lo descomprime y lo envia a esta ruta \laragon\data\mysql, y abren la carpeta en heidiSQL que es una herramienta que trae laragon, y le dan conectar. 
