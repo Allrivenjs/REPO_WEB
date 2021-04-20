@@ -1,0 +1,29 @@
+{% extends "layout.twig" %}
+{% block titleP %}
+    Blog en PHP
+{% endblock %}
+{% block title %}
+    Blog Title
+{% endblock %}
+{% block content %}
+    {% for row in blogPosts  %}
+<div class="list-group p-2">
+        <div class="card" style="width: 39rem;">
+            <img src="images/gaming-keyboards-200-01.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ row.title }}</h5>
+                <p class="card-text">{{ row.content }}</p>
+                <p>Jan 1, 2020 by <a href="" class="btn">Alex</a></p>
+            </div>
+        </div>
+</div>
+    {% endfor %}
+{%  endblock %}
+{% block footer  %}
+    <footer>
+        This is a footer <br>
+        <a class="btn btn-secondary" href="{{ 'admin' | url }}">Admin</a>
+    </footer>
+{% endblock %}
+
+

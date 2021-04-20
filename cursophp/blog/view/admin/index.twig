@@ -1,0 +1,20 @@
+{% extends "layout.twig" %}
+{% block titleP %}
+    Blog en PHP | Admin panel
+{% endblock %}
+{% block title %}
+    Admin Panel
+{% endblock %}
+{% block content %}
+
+
+            <a class="btn btn-primary" href="{{'admin/posts | url'}}">Manage Posts</a>
+
+
+{%  endblock %}
+{% block footer  %}
+<footer>
+    This is a footer <br>
+    <a class="btn btn-secondary" href="/">Principal</a>
+</footer>
+{% endblock %}

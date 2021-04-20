@@ -1,64 +1,68 @@
 <?php
-    include_once '../config.php';
-    $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-    $query->execute();
-    $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+require_once '../vendor/autoload.php';
+include_once '../config.php';
 
-?>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-          rel="stylesheet">
-    <title>Blog en Php</title>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Blog Title</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <?php foreach ($blogPosts as $row): ?>
-                    <div class="blog-post">
-                        <h2><?= $row['title']; ?></h2>
-                        <p>Jan 1, 2020 by <a href="">Alex</a></p>
-                        <div class="blog-post-image">
-                            <img width="75%" src="images/gaming-keyboards-200-01.jpg" alt="">
-                        </div>
-                        <div class="blog-post-conten"><?= $row['content']; ?></div>
-                    </div>
-                <?php endforeach ?>
-            </div>
-            <div class="col-md-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci, corporis deserunt eius expedita, harum illo labore magni natus, omnis provident quidem quis quos reiciendis rem repellat sequi sunt veritatis!
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <footer>
-                    This is a footer <br>
-                    <a href="admin/index.php">Admin</a>
-                </footer>
-            </div>
-        </div>
-        
-    </div>
+//Aqui obtenemos la ruta completa de donde se encuentra le usuario
+function ruteC()
+{
+    $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+    $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . $baseDir;
 
 
 
+    define('BASE_URL', $baseUrl) ;
+    return BASE_URL;
+}
+var_dump(ruteC());
+use Phroute\Phroute\RouteCollector;
+$router = new RouteCollector();
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
-</body>
-</html>
+//Aqui obtenemos la ruta donde se encuentra el usuario.
+function request_path()
+{
+    $request_uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+    $script_name = explode('/', trim($_SERVER['SCRIPT_NAME'], '/'));
+    $parts = array_diff_assoc($request_uri, $script_name);
+    if (empty($parts))
+    {
+        return '/';
+
+    }
+    $path = implode('/', $parts);
+    if (($position = strpos($path, '?')) !== FALSE)
+    {
+        $path = substr($path, 0, $position);
+    }
+    return $path;
+}
+
+
+//Tomamos la informacion de la paguina y la guardamos en un subbufer,
+//hastas que se termine de cargar y renderrear, para mostrarse
+function render($fileName, $params = []){
+        ob_start();
+        extract($params);
+        include $fileName;
+        return ob_get_clean();
+}
+
+//Rutas de la app
+
+//ruta principal
+$router->controller('/', app\controllers\IndexController::class);
+
+//ruta admin
+$router->controller('/admin', app\controllers\admin\IndexController::class);
+
+//ruta de los configuracion de posts
+$router->controller('/admin/posts', app\controllers\admin\PostsControllers::class);
+
+//Muestra de la paguina
+$dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
+
+$response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'],request_path());
+echo $response;
