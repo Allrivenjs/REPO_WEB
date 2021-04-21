@@ -5,15 +5,16 @@ namespace app\controllers\admin;
 
 
 use app\controllers\BaseController;
+use app\models\BlogPost;
+use Illuminate\Database\Eloquent\Model;
+use Sirius\Validation\Validator;
 
 class PostsControllers extends BaseController
 {
     function getIndex(){
         //admin/posts or admin/posts/index
-        global $pdo;
-        $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-        $query->execute();
-        $blogPosts = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        $blogPosts = BlogPost::all();
 
 
         return $this->render('admin/posts.twig', ['blogPosts'=>$blogPosts]);
@@ -24,14 +25,32 @@ class PostsControllers extends BaseController
         return $this->render('admin/insert-post.twig');
     }
     function postCreate(){
-        //admin/posts/create -- posts
-        global $pdo;
-        $sql = 'INSERT INTO blog_posts (title, content) VALUES (:title, :content)';
-        $query=$pdo->prepare($sql);
-        $result=$query->execute([
-            'title'=>$_POST['title'],
-            'content'=>$_POST['content']
+        $errors=[];
+        $result=false;
+
+        //Validacion de datos
+        $validator = new Validator();
+        $validator->add('title', 'required');
+        $validator->add('content', 'required');
+
+        if ($validator->validate($_POST)){
+            //admin/posts/create -- posts
+            $blogPost = new BlogPost([
+                'title'=>$_POST['title'],
+                'content'=>$_POST['content']
+            ]);
+            $blogPost->save();
+            $result=true;
+
+        }else{
+            $errors = $validator->getMessages();
+        }
+        
+
+
+        return $this->render('admin/insert-post.twig', [
+            'result'=>$result,
+            'errors'=>$errors
         ]);
-        return $this->render('admin/insert-post.twig', ['result'=>$result]);
     }
 }

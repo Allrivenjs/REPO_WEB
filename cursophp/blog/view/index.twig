@@ -3,7 +3,7 @@
     Blog en PHP
 {% endblock %}
 {% block title %}
-    Blog Title
+    UN CODIGO EN PHP | BLOG
 {% endblock %}
 {% block content %}
     {% for row in blogPosts  %}
@@ -24,6 +24,32 @@
         This is a footer <br>
         <a class="btn btn-secondary" href="{{ 'admin' | url }}">Admin</a>
     </footer>
+{% endblock %}
+{% block cards %}
+<div class="col-md-4  list-group">
+    <div class="row p-2 ">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row p-2 ">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 

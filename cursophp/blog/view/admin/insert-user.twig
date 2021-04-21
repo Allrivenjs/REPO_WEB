@@ -1,0 +1,57 @@
+
+{% extends "layout.twig" %}
+{% block titleP %}
+    Blog en PHP | Manage Users
+{% endblock %}
+{% block title %}
+    MANAGE USERS
+{% endblock %}
+{% block content %}
+
+
+    <h2>NEW USER </h2>
+    {% if errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                {% for input, messages in errors %}
+                    {% for message in messages %}
+                        <li>
+                            <strong>Upps!! {{ input }} :</strong>  {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {%  if result %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> your user save!!!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {%  endif %}
+    <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
+
+    <form  method="post">
+        <div class="form-floating mb-3">
+            <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingName" >
+            <label for="floatingName">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class=" pt-2">
+            <button type="submit" class="btn btn-primary mb-3">Confirm User</button>
+        </div>
+    </form>
+
+
+
+{%  endblock %}
+

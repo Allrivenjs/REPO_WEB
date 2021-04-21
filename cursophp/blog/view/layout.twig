@@ -11,9 +11,33 @@
           rel="stylesheet">
     <title>{% block titleP %}{% endblock %}</title>
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ '' | url }}">Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ '' | url }}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         ADMIN PANEL
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ 'admin/posts' | url }}">MANAGE POSTS</a></li>
+                        <li><a class="dropdown-item" href="{{ 'admin/users' | url }}">MANAGE USERS</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <body>
-<div class="container">
-    <div class="row">
+<div class="container ">
+    <div class="row p-4 ">
         <div class="col-md-12 text-center">
             <h1>{% block title %}{% endblock %}</h1>
         </div>
@@ -22,40 +46,24 @@
         <div class="col-md-8">
             {% block content %}{% endblock %}
         </div>
-        <div class="col-md-4  list-group">
-            <div class="row p-2 ">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2 ">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% block cards   %}
+
+        {% endblock %}
     </div>
     <div class="row">
         <div class="col-md-12 p-3 m-2">
-           {% block footer %}{% endblock %}
+
         </div>
     </div>
 
 </div>
 
 
+<script>
+    if (window.history.replaceState) { // verificamos disponibilidad
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
