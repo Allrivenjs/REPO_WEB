@@ -4,6 +4,8 @@ ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
 require_once '../vendor/autoload.php';
 
+session_start();
+
 $dotenv =Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
 $dotenv->load();
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -66,17 +68,47 @@ function request_path()
 
 
 //Rutas de la app
-
 //ruta principal
 $router->controller('/', app\controllers\IndexController::class);
 
-//ruta admin
-//$router->controller('/admin', app\controllers\admin\IndexController::class);
 
-//ruta de los configuracion de posts
-$router->controller('/admin/posts', app\controllers\admin\PostsControllers::class);
+//filtros
+$router->filter('auth', function(){
+    if(!isset($_SESSION['userId'])){
+        header('Location: '.BASE_URL . 'auth/login');
+        return false;
 
-$router->controller('/admin/users', app\controllers\admin\UserController::class);
+    }
+});
+
+$router->filter('sesionOn', function(){
+    if(isset($_SESSION['userId'])){
+        header('Location: '.BASE_URL . '');
+        return false;
+
+    }
+});
+
+$router->group(['before' => 'sesionOn'], function($router){
+
+    //ruta admin
+    $router->controller('/auth', app\controllers\AuthController::class);
+
+});
+
+
+$router->group(['before' => 'auth'], function($router){
+
+    //ruta de los configuracion de posts
+    $router->controller('/admin/posts', app\controllers\admin\PostsControllers::class);
+    $router->controller('/admin/users', app\controllers\admin\UserController::class);
+
+
+});
+
+
+
+
 
 //Muestra de la paguina
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());

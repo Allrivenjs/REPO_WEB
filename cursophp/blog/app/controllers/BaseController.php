@@ -4,6 +4,8 @@
 namespace app\controllers;
 
 
+use app\models\User;
+
 class BaseController
 {
     protected $templateEngine;
@@ -22,5 +24,19 @@ class BaseController
     }
         function render($fileName, $data=[]){
                 return $this ->templateEngine->render($fileName, $data);
+        }
+
+        function sesion(){
+            $user=[];
+            if(isset($_SESSION['userId'])){
+                $userId = $_SESSION['userId'];
+                $user = User::find($userId);
+
+                if($user){
+                    return $user;
+
+                }
+            }
+
         }
 }

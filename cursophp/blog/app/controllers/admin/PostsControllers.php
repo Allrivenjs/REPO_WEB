@@ -14,15 +14,23 @@ class PostsControllers extends BaseController
     function getIndex(){
         //admin/posts or admin/posts/index
 
-        $blogPosts = BlogPost::all();
+        
+            $blogPosts = BlogPost::all();
 
 
-        return $this->render('admin/posts.twig', ['blogPosts'=>$blogPosts]);
+            return $this->render('admin/posts.twig', [
+                'blogPosts'=>$blogPosts,
+                'sesion'=>$this->sesion()
+            ]);
+
+
+
     }
     function getCreate(){
         // admin/posts/create
 
-        return $this->render('admin/insert-post.twig');
+            return $this->render('admin/insert-post.twig', ['sesion' => $this->sesion()]);
+
     }
     function postCreate(){
         $errors=[];
@@ -45,12 +53,13 @@ class PostsControllers extends BaseController
         }else{
             $errors = $validator->getMessages();
         }
-        
+
 
 
         return $this->render('admin/insert-post.twig', [
             'result'=>$result,
-            'errors'=>$errors
+            'errors'=>$errors,
+            'sesion'=>$this->sesion()
         ]);
     }
 }

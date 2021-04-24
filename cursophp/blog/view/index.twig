@@ -9,6 +9,7 @@
     {% for row in blogPosts  %}
 <div class="list-group p-2">
         <div class="card" style="width: 39rem;">
+            {% if row.image %}
             <img src="images/gaming-keyboards-200-01.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ row.title }}</h5>

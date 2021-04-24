@@ -22,6 +22,8 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ '' | url }}">Home</a>
                 </li>
+
+                {% if sesion %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                          ADMIN PANEL
@@ -31,7 +33,28 @@
                         <li><a class="dropdown-item" href="{{ 'admin/users' | url }}">MANAGE USERS</a></li>
                     </ul>
                 </li>
+                {% endif %}
+                {% if  not sesion %}
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="{{ 'auth/login' | url }}">Login</a>
+                    </li>
+                {% endif %}
+                {% if sesion %}
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="{{ 'auth/logout' | url }}">logout</a>
+                    </li>
+                {% endif %}
+
+
+
             </ul>
+            {% if sesion %}
+            <div class="container-fluid">
+            <div class="navbar-text">
+                Sesion activa {{  user.name }}
+            </div>
+            {% endif %}
+            </div>
         </div>
     </div>
 </nav>
