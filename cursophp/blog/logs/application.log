@@ -27,3 +27,4 @@
 [2021-04-27T02:46:05.862086+00:00] app log.INFO: Login userId: sebastian [] []
 [2021-04-27T02:53:01.703491+00:00] app log.INFO: Logout userId: sebastian [] []
 [2021-04-27T04:34:05.365221+00:00] app log.INFO: Login userId: sebastian [] []
+[2021-04-27T06:09:06.722283+00:00] app log.INFO: Login userId: Fabian [] []
