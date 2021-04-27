@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'fbf10a0ed16f3c60d46ce067394080dee59a7e73',
+    'reference' => 'cceda827abdf88ced7bb17515d0bed34f588315b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'fbf10a0ed16f3c60d46ce067394080dee59a7e73',
+      'reference' => 'cceda827abdf88ced7bb17515d0bed34f588315b',
     ),
     'doctrine/inflector' => 
     array (
@@ -92,6 +92,15 @@
       ),
       'reference' => '074a9b7adefcdd7108e19faa96bc9dacfe922062',
     ),
+    'monolog/monolog' => 
+    array (
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1cb1cde8e8dd0f70cc0fe51354a59acad9302084',
+    ),
     'nesbot/carbon' => 
     array (
       'pretty_version' => '2.46.0',
@@ -135,11 +144,21 @@
         0 => '1.0',
       ),
     ),
+    'psr/log' => 
+    array (
+      'pretty_version' => '1.1.3',
+      'version' => '1.1.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
+    ),
     'psr/log-implementation' => 
     array (
       'provided' => 
       array (
         0 => '1.0',
+        1 => '1.0.0',
       ),
     ),
     'psr/simple-cache' => 

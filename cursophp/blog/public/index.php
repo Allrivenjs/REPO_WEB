@@ -3,7 +3,6 @@ ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
 require_once '../vendor/autoload.php';
-
 session_start();
 
 $dotenv =Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
@@ -81,30 +80,27 @@ $router->filter('auth', function(){
     }
 });
 
-$router->filter('sesionOn', function(){
-    if(isset($_SESSION['userId'])){
-        header('Location: '.BASE_URL . '');
-        return false;
 
-    }
-});
 
-$router->group(['before' => 'sesionOn'], function($router){
 
     //ruta admin
     $router->controller('/auth', app\controllers\AuthController::class);
 
-});
+
 
 
 $router->group(['before' => 'auth'], function($router){
+
 
     //ruta de los configuracion de posts
     $router->controller('/admin/posts', app\controllers\admin\PostsControllers::class);
     $router->controller('/admin/users', app\controllers\admin\UserController::class);
 
 
+
+
 });
+
 
 
 

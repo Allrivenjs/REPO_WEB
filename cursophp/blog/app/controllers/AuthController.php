@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 use app\controllers\BaseController;
+use app\log;
 use app\models\User;
 use Sirius\Validation\Validator;
 
@@ -11,7 +12,13 @@ class AuthController extends  BaseController
 {
     function getLogin()
     {
-        return $this->render('Auth/login.twig');
+        if(isset($_SESSION['userId'])){
+            header('Location: '.BASE_URL . '');
+            return false;
+
+        }else {
+            return $this->render('Auth/login.twig');
+        }
     }
     function postLogin()
     {
@@ -27,6 +34,7 @@ class AuthController extends  BaseController
             if($user){
                 if (password_verify($_POST['password'],$user->password)){
                     $_SESSION['userId']=$user->id;
+                    Log::logInfo('Login userId: ' .$user->name);
                     header('Location:' . BASE_URL . '');
                     $sesion= true;
                     return null;
@@ -35,17 +43,21 @@ class AuthController extends  BaseController
                 $validator->addMessage('email', 'Username and/or password does not match');
 
 
-
         }
         $errors = $validator->getMessages();
-        return $this->render('Auth/login.twig',[
 
-            'errors'=>$errors
-        ]);
+
+            return $this->render('Auth/login.twig', [
+
+                'errors' => $errors
+            ]);
+
     }
 
     function getLogout()
     {
+        $user = User::find($_SESSION['userId']);
+        Log::logInfo('Logout userId: '. $user->name);
         unset($_SESSION['userId']);
         header('Location:'.BASE_URL.'auth/login');
     }

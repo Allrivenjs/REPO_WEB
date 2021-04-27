@@ -10,6 +10,12 @@
     <p>
         <a class="btn btn-primary" href="{{ 'admin/posts/create' | url }}">New Posts</a>
     </p>
+    {%  if result %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> your post delete!!!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {%  endif %}
 <table class="table table-striped table-hover">
     <caption>Table content blogs</caption>
     <thead>
@@ -21,24 +27,35 @@
     </thead>
     <tbody>
 
+
     {% for row in blogPosts  %}
+
     <tr>
+
+
+
         <td>{{row.title}}</td>
         <td>
-            <a href="#">
+            <a href="{{ 'admin/posts/edit/' | url }}{{ row.id }}">
                 <span class="material-icons">
-                                    build
+                    build
                 </span>
             </a>
-            <a href="#">
-                <span class="material-icons">
-                                    delete
+            <a href="{{ 'admin/posts/delete/' | url }}{{ row.id }}">
+               
+                <span class="material-icons" >
+                       delete
+
                 </span>
+
+
             </a>
+
         </td>
 
     </tr>
     {% endfor %}
+
     </tbody>
 </table>
 {%  endblock %}

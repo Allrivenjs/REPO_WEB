@@ -9,22 +9,60 @@
 {% block content %}
 
 
-   <h2>New Posts</h2>
-    {% if errors %}
-        {% include('partials/errors.twig') %}
-    {% endif %}
-    {%  if result %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> your post save!!!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {%  endif %}
-   <a class="btn btn-secondary mb-2" href="{{ 'admin/posts' | url }}">Back</a>
 
-   <form  method="post">
+    {% if blogPosts %}
+        <h2>Update Posts</h2>
+        {% if errors %}
+            {% include('partials/errors.twig') %}
+        {% endif %}
+            {%  if result %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> your post update!!!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {%  endif %}
+        <a class="btn btn-secondary mb-2" href="{{ 'admin/posts' | url }}">Back</a>
+     {% for row in blogPosts %}
+    <form  method="post">
+    <div class="form-floating mb-3">
+        <input type="name" name="title" class="form-control" id="floatingInput" placeholder="name@example.com" value="{{ row.title }}">
+        <label for="floatingInput">Title</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="img" name="img" class="form-control" id="floatingImage" placeholder="Image" value="{{ row.img_url }}" required>
+        <label for="floatingImage">Insert your url image</label>
+    </div>
+
+    <div class="form-floating">
+        <textarea class="form-control" name="content" placeholder="Leave a comment here" id="floatingTextarea2"  style="height: 150px">{{ row.content }}</textarea>
+        <label for="floatingTextarea2">Content</label>
+    </div>
+        {% endfor %}
+        <div class="mt-2">
+            <button type="submit" class="btn btn-primary mb-3">Confirm Post</button>
+        </div>
+        </form>
+
+    {% else %}
+        <h2>New Posts</h2>
+        {% if errors %}
+            {% include('partials/errors.twig') %}
+        {% endif %}
+        {%  if result %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> your post save!!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {%  endif %}
+        <a class="btn btn-secondary mb-2" href="{{ 'admin/posts' | url }}">Back</a>
+   <form  method="post" onsubmit="return validateForm()">
        <div class="form-floating mb-3">
            <input type="name" name="title" class="form-control" id="floatingInput" placeholder="name@example.com">
            <label for="floatingInput">Title</label>
+       </div>
+       <div class="form-floating mb-3">
+           <input type="img" name="img" class="form-control" id="floatingImage" placeholder="Image" >
+           <label for="floatingImage">Insert your url image</label>
        </div>
 
        <div class="form-floating">
@@ -35,8 +73,28 @@
            <button type="submit" class="btn btn-primary mb-3">Confirm Post</button>
        </div>
    </form>
+    {% endif %}
 
-
-
+       {#<div class="input-group mt-3 mb-3">
+           <input type="file" class="form-control" id="inputGroupFile02">
+           <label class="input-group-text" for="inputGroupFile02">Upload</label>
+       </div>
+#}
    {%  endblock %}
 
+{% block js %}
+    <script >
+
+        function validateForm(){
+            var title= document.getElementById('floatingInput').value.trim();
+            if(title===''){
+                Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                );
+                return false;
+            }
+        }
+    </script>
+{% endblock %}
