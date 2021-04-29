@@ -28,3 +28,8 @@
 [2021-04-27T02:53:01.703491+00:00] app log.INFO: Logout userId: sebastian [] []
 [2021-04-27T04:34:05.365221+00:00] app log.INFO: Login userId: sebastian [] []
 [2021-04-27T06:09:06.722283+00:00] app log.INFO: Login userId: Fabian [] []
+[2021-04-28T19:31:33.357323+00:00] app log.INFO: Login userId: Fabian [] []
+[2021-04-29T00:49:17.723190+00:00] app log.INFO: Login userId: Fabian [] []
+[2021-04-29T03:25:48.559142+00:00] app log.INFO: Login userId: Fabian [] []
+[2021-04-29T05:45:49.741310+00:00] app log.INFO: Logout userId: Fabian [] []
+[2021-04-29T05:45:57.121124+00:00] app log.INFO: Login userId: Fabian [] []

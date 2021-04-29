@@ -1,0 +1,61 @@
+
+{% extends "layout.twig" %}
+{% block titleP %}
+    Blog en PHP | Manage Perfil
+{% endblock %}
+{% block title %}
+    MANAGE PERFIL
+{% endblock %}
+{% block content %}
+
+
+    <h2>NEW Perfil </h2>
+    {% if errors %}
+        {% include('partials/errors.twig') %}
+    {% endif %}
+
+    {%  if result %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> your user save!!!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {%  endif %}
+    <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
+
+    <form  method="post">
+        <div class="form-floating mb-3">
+            <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingName" >
+            <label for="floatingName">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="ProfProfile" class="form-control" id="floatingInput" placeholder="Frontend developer">
+            <label for="ProfProfile">Professional profil</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="PersProfile" class="form-control" id="floatingImage" placeholder="Tell something about you" >
+            <label for="PersProfile"></label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="contact" class="form-control" id="floatingImage" placeholder="Your social media" >
+            <label for="contact"></label>
+        </div>
+        
+        <--Education--!>
+        
+        <div class="">
+            <input type="number" name="nEducation" class="" id="nEducation">
+            <label>How many education fields do you want to add?</label>
+
+        </div>
+            
+        <div class="form-floating mb-3">
+            <input type="text" name="contact" class="form-control" id="floatingImage" placeholder="Your social media" >
+            <label for="contact"></label>
+        </div>
+        
+    </form>
+
+
+
+{%  endblock %}
+

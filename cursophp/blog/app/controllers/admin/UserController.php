@@ -6,7 +6,7 @@ namespace app\controllers\admin;
 
 use app\controllers\BaseController;
 use app\models\User;
-use Illuminate\Database\Eloquent\Model;
+
 use Sirius\Validation\Validator;
 
 class UserController extends BaseController
@@ -33,7 +33,7 @@ class UserController extends BaseController
         {
 
                 $errors=[];
-                $result=false;
+
                 $validator = new Validator();
                 $validator->add('name', 'required');
                 $validator->add('email', 'required');

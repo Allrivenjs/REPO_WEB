@@ -68,7 +68,10 @@ function request_path()
 
 //Rutas de la app
 //ruta principal
+
 $router->controller('/', app\controllers\IndexController::class);
+
+
 
 
 //filtros
@@ -83,8 +86,9 @@ $router->filter('auth', function(){
 
 
 
-    //ruta admin
-    $router->controller('/auth', app\controllers\AuthController::class);
+ //ruta admin
+$router->controller('/auth', app\controllers\AuthController::class);
+$router->controller('/about/profile', app\controllers\perfil\jobsController::class);
 
 
 
@@ -95,15 +99,11 @@ $router->group(['before' => 'auth'], function($router){
     //ruta de los configuracion de posts
     $router->controller('/admin/posts', app\controllers\admin\PostsControllers::class);
     $router->controller('/admin/users', app\controllers\admin\UserController::class);
-
+    $router->controller('/profile/show', app\controllers\perfil\AdminProfilesController::class);
 
 
 
 });
-
-
-
-
 
 
 //Muestra de la paguina

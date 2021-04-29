@@ -23,7 +23,7 @@ class BaseController
         }));
     }
         function render($fileName, $data=[]){
-                return $this ->templateEngine->render($fileName, $data);
+                return $this->templateEngine->render($fileName, $data);
         }
 
         function sesion(){

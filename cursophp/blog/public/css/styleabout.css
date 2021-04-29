@@ -1,0 +1,211 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: #062e62;
+}
+
+a:hover {
+  color: rgba(6, 46, 98, 0.2);
+}
+
+.header {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  background: url("../images/fondoHeader.jpg") no-repeat center center fixed;
+  background-size: auto;
+  height: 250px;
+}
+.header .header__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.header .header__container .header__img img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+.header .header__container .header__titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.header .header__container .header__titles .header__name {
+  font-size: 2.3em;
+  font-weight: 700;
+}
+.header .header__container .header__titles .header__profesion {
+  font-size: 1.4em;
+}
+
+@media only screen and (max-width: 1366px) {
+  .header .header__img img {
+    width: 100px;
+    height: 100px;
+  }
+}
+.article {
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+.article section {
+  padding: 50px;
+}
+.article .infoL {
+  background-color: #efefef;
+}
+
+.card {
+  padding: 1rem;
+  margin-bottom: 40px;
+}
+.card h2 {
+  font-size: 1.6em;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+.card .linea {
+  display: inline-block;
+  width: 120px;
+  height: 10px;
+  background-color: rgba(128, 121, 121, 0.8);
+}
+.card .linea_exp {
+  display: inline-block;
+  width: 620px;
+  height: 3px;
+  background-color: rgba(128, 121, 121, 0.8);
+}
+.card p {
+  font-weight: 300;
+}
+.card .container h2 {
+  font-size: 1.2em;
+}
+.card .container .date {
+  margin-left: 28px;
+}
+
+.card:hover {
+  transform: scale(1.07);
+}
+.card:hover h1 {
+  font-size: 1.5em;
+  letter-spacing: 3px;
+}
+.card:hover .linea {
+  display: inline-block;
+  width: 400px;
+  height: 10px;
+  background-color: #807979;
+  transition: width ease-in 0.4s;
+}
+.card:hover .linea-lg {
+  width: 620px;
+}
+
+.list {
+  margin-left: 28px;
+  margin-bottom: 20px;
+  list-style-image: url("../icons/proximo.svg");
+}
+
+.card_contact a {
+  color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  margin-top: 20px;
+}
+.card_contact a .icon {
+  margin-right: 4px;
+  width: 25px;
+}
+.card_contact a .icon-email {
+  content: url("../icons/email.svg");
+}
+.card_contact a .icon-cell {
+  content: url("../icons/llamada-telefonica.svg");
+}
+.card_contact a .icon-maps {
+  content: url("../icons/ubicacion.svg");
+}
+.card_contact a:hover {
+  color: black;
+}
+
+.btn-flotante {
+  font-size: 16px;
+  /* Cambiar el tamaño de la tipografia */
+  text-transform: uppercase;
+  /* Texto en mayusculas */
+  font-weight: bold;
+  /* Fuente en negrita o bold */
+  color: #ffffff;
+  /* Color del texto */
+  border-radius: 5px;
+  /* Borde del boton */
+  letter-spacing: 2px;
+  /* Espacio entre letras */
+  background-color: #E91E63;
+  /* Color de fondo */
+  padding: 18px 30px;
+  /* Relleno del boton */
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  transition: all 300ms ease 0ms;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+}
+
+.btn-flotante:hover {
+  background-color: #2c2fa5;
+  /* Color de fondo al pasar el cursor */
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-7px);
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 600px) {
+  .btn-flotante {
+    font-size: 14px;
+    padding: 12px 20px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+/*
+⠄⠄⠄⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄
+ ⠄⠄⠄⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄
+⠄⠄⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄  ________________
+⠄⠄⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ |    SEMPAI      |
+⠄⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ |  YOUR CODE IS  |
+⠄⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ |    VERY BIG    |
+⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ |   _____________|
+⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄ / /
+⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠄//
+⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃⠄
+⠄⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃⠄⠄
+⠄⠄⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁⠄⠄⠄
+⠄⠄⠄⠄⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁⠄⠄⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠄⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁⠄⠄⠄⠄⠄⢀⣠⣴
+⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿
+*/
+
+/*# sourceMappingURL=styleabout.css.map */

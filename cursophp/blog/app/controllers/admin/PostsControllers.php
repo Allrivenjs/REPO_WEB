@@ -7,7 +7,7 @@ namespace app\controllers\admin;
 use app\controllers\BaseController;
 use app\models\BlogPost;
 use app\models\User;
-use Illuminate\Database\Eloquent\Model;
+
 use Sirius\Validation\Validator;
 
 class PostsControllers extends BaseController
@@ -80,9 +80,7 @@ class PostsControllers extends BaseController
     }
 
     public function getEdit($id) {
-            $title='';
-            $img_url='';
-            $content='';
+
         $blogPosts = BlogPost::where('id', $id)->select('title', 'img_url', 'content')->get();
 
         return $this->render('admin/insert-post.twig', [
