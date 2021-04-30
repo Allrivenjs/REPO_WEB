@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 27-04-2021 a las 04:59:54
+-- Tiempo de generación: 30-04-2021 a las 06:13:42
 -- Versión del servidor: 8.0.23-0ubuntu0.20.04.1
 -- Versión de PHP: 8.0.1
 
@@ -56,6 +56,27 @@ INSERT INTO `blog_posts` (`id`, `title`, `content`, `img_url`, `creador`, `creat
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `curriculum`
+--
+
+CREATE TABLE `curriculum` (
+  `id` int NOT NULL,
+  `nombre_c` text NOT NULL,
+  `carrera` text NOT NULL,
+  `foto` text NOT NULL,
+  `perfil_p` longtext NOT NULL,
+  `educacion` text NOT NULL,
+  `año_e` text NOT NULL,
+  `correo` text NOT NULL,
+  `telefono` text NOT NULL,
+  `dirrecion` text NOT NULL,
+  `habilidades` json NOT NULL,
+  `exp_laboral` json NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -89,6 +110,12 @@ ALTER TABLE `blog_posts`
   ADD KEY `creador` (`creador`);
 
 --
+-- Indices de la tabla `curriculum`
+--
+ALTER TABLE `curriculum`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -103,6 +130,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `blog_posts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT de la tabla `curriculum`
+--
+ALTER TABLE `curriculum`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
