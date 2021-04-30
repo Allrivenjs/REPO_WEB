@@ -106,6 +106,8 @@ $router->group(['before' => 'auth'], function($router){
 });
 
 
+
+
 //Muestra de la paguina
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 

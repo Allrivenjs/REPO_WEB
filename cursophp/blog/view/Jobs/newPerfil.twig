@@ -1,5 +1,6 @@
 
 {% extends "layout.twig" %}
+
 {% block titleP %}
     Blog en PHP | Manage Perfil
 {% endblock %}
@@ -23,39 +24,42 @@
     <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
 
     <form  method="post">
-        <div class="form-floating mb-3">
-            <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingName" >
-            <label for="floatingName">Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" name="ProfProfile" class="form-control" id="floatingInput" placeholder="Frontend developer">
-            <label for="ProfProfile">Professional profil</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" name="PersProfile" class="form-control" id="floatingImage" placeholder="Tell something about you" >
-            <label for="PersProfile"></label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" name="contact" class="form-control" id="floatingImage" placeholder="Your social media" >
-            <label for="contact"></label>
-        </div>
-        
-        <--Education--!>
-        
-        <div class="">
-            <input type="number" name="nEducation" class="" id="nEducation">
-            <label>How many education fields do you want to add?</label>
+          {#Name#}
+          <div class="form-floating mb-3">
+              <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingImage" >
+              <label for="floatingImage"> full name</label>
+          </div>
 
-        </div>
-            
-        <div class="form-floating mb-3">
-            <input type="text" name="contact" class="form-control" id="floatingImage" placeholder="Your social media" >
-            <label for="contact"></label>
-        </div>
-        
-    </form>
+          {#profession#}
+          <div class="form-floating mb-3">
+              <input type="text" name="ProfProfile" class="form-control" id="floatingImage" placeholder="Frontend developer">
+              <label for="floatingImage">Professional profil</label>
+          </div>
 
+          {#something about you#}
+          <div class="form-floating mb-3">
+              <input type="text" name="PersProfile" class="form-control" id="floatingAbout" placeholder="Tell something about you" >
+              <label for="floatingAbout">Tell something about you</label>
+          </div>
 
+          {#Education#}
+          <div class="form-floating mb-3  input-group-ms mb-3">
+              <div class="md-3 form-label m-4"><label for="NumEduFields " id="label" class="h5">How many education fields do you want to add?</label></div>
+              <p class="NumEduFields badge bg-secondary p-2" id="NumEduFields">0</p>
+              <div class="controlEduField btn btn-primary input-group-text" id="moreEduFieldButtom">+</div>
+              <div class="controlEduField btn btn-secondary input-group-text" id="lessEduFieldButtom">-</div>
+
+          </div>
+
+          {#Social media#}
+          <div class="form-floating mb-3  input-group-ms mb-3">
+             <div class="md-3 form-label m-4 h3"> <label for="NumSocialFields " id="label" class="h5">How many contact fields do you want to add?</label></div>
+              <p class="NumSocialFields badge bg-secondary p-2" id="NumSocialFields">0</p>
+              <div class="controlEduField btn btn-primary input-group-text" id="moreSocialFieldButtom">+</div>
+              <div class="controlEduField btn btn-secondary input-group-text" id="lessSocialFieldButtom">-</div>
+          </div>
+
+      </form>
+    <script src="/js/profileScript.js"></script>
 
 {%  endblock %}
-
