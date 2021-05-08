@@ -6,6 +6,8 @@
     MANAGE POSTS
 {% endblock %}
 {% block content %}
+
+
     <h2>Posts</h2>
     <p>
         <a class="btn btn-primary" href="{{ 'admin/posts/create' | url }}">New Posts</a>
@@ -32,24 +34,35 @@
 
     <tr>
 
-
-
-        <td>{{row.title}}</td>
+        {% if row.deleted_at != null %}
+            <td><strike>{{row.title}}</strike></td>
+        {% else %}
+            <td>{{row.title}}</td>
+            {% endif %}
         <td>
             <a href="{{ 'admin/posts/edit/' | url }}{{ row.id }}">
-                <span class="material-icons">
-                    build
-                </span>
+                <abbr title="EDITAR POST">
+                    <span class="material-icons">
+                        build
+                    </span>
+                </abbr>
             </a>
             <a href="{{ 'admin/posts/delete/' | url }}{{ row.id }}">
-               
-                <span class="material-icons" >
+                <abbr title="ELIMINAR">
+                    <span class="material-icons" >
                        delete
-
-                </span>
-
-
+                    </span>
+                </abbr>
             </a>
+            {% if row.deleted_at != null %}
+            <a href="{{ 'admin/posts/restore/' | url }}{{ row.id }}">
+                <abbr title="RESTAURAR POSTS" >
+                    <span class="material-icons">
+                        restore
+                    </span>
+                </abbr>
+            </a>
+            {% endif  %}
 
         </td>
 

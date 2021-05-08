@@ -7,6 +7,12 @@
 {% endblock %}
 {% block content %}
     <h2>Users</h2>
+    {%  if result %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> your user save!!!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {%  endif %}
     <p>
         <a class="btn btn-primary" href="{{ 'admin/users/create' | url }}">New Users</a>
     </p>
@@ -27,16 +33,31 @@
                 <td>{{row.name}}</td>
                 <td>{{row.email}}</td>
                 <td>
-                    <a href="#">
-                <span class="material-icons">
+                    <a href="{{ 'admin/users/edit/' | url }}{{ row.id }}">
+                        <abbr title="EDITAR USUARIO">
+                            <span class="material-icons">
                                     build
-                </span>
+                            </span>
+                        </abbr>
                     </a>
-                    <a href="#">
-                <span class="material-icons">
+                    <a href="{{  'admin/users/delete/' | url }}{{ row.id }}">
+                        <abbr title="ELIMINAR USUARIO">
+                            <span class="material-icons">
                                     delete
-                </span>
+                            </span>
+                        </abbr>
                     </a>
+                    {% if row.deleted_at != null %}
+                    <a href="{{ 'admin/users/restore/' | url }}{{ row.id }}">
+                        <abbr title="RESTAURAR POSTS">
+                    <span class="material-icons">
+                        restore
+                    </span>
+                        </abbr>
+                    </a>
+                    {% endif %}
+
+
                 </td>
 
             </tr>

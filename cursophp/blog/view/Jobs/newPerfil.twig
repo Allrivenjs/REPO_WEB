@@ -23,43 +23,72 @@
     {%  endif %}
     <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
 
-    <form  method="post">
+    <form  method="post" onsubmit="return onsubmit()">
           {#Name#}
           <div class="form-floating mb-3">
-              <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingImage" >
+              <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingImage" required>
               <label for="floatingImage"> full name</label>
           </div>
 
           {#profession#}
           <div class="form-floating mb-3">
-              <input type="text" name="ProfProfile" class="form-control" id="floatingImage" placeholder="Frontend developer">
+              <input type="text" name="ProfProfile" class="form-control" id="floatingImage" placeholder="Frontend developer" required>
               <label for="floatingImage">Professional profil</label>
           </div>
 
           {#something about you#}
           <div class="form-floating mb-3">
-              <input type="text" name="PersProfile" class="form-control" id="floatingAbout" placeholder="Tell something about you" >
+              <input type="text" name="PersProfile" class="form-control" id="floatingAbout" placeholder="Tell something about you" required>
               <label for="floatingAbout">Tell something about you</label>
           </div>
+        {#Contact#}
+            <div class="form-floating mb-3">
+                <input type="text" name="Dirrecion" class="form-control" id="floatingD" placeholder="Tell something about you" required>
+                <label for="floatingD">Dirrecion</label>
+            </div>
+        {#Email#}
+        <div class="form-floating  mb-3">
+            <input type="text" name="email" class="form-control " id="floatingEmail" placeholder="Tell something about you" required>
+            <label for="floatingEMail">Email</label>
+
+            {#Number#}
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="Number" class="form-control" id="floatingN" placeholder="Tell something about you" required>
+            <label for="floatingN"> full Number phone</label>
+        </div>
+
+        {#Redsocial#}
+        <div class="form-floating mb-3">
+            <input type="text" name="redsocial" class="form-control" id="floatingRed" placeholder="Tell something about you" required>
+            <label for="floatingRed">Redsocial or Github</label>
+        </div>
 
           {#Education#}
           <div class="form-floating mb-3  input-group-ms mb-3">
               <div class="md-3 form-label m-4"><label for="NumEduFields " id="label" class="h5">How many education fields do you want to add?</label></div>
-              <p class="NumEduFields badge bg-secondary p-2" id="NumEduFields">0</p>
+              {# <p class="NumEduFields badge bg-secondary p-2" id="NumEduFields">0</p>#}
+              
+              <input class="btn btn-info" style="width:50px !important;" type="text" name="EduFields" id="NumEduFields" value="0" readonly >
               <div class="controlEduField btn btn-primary input-group-text" id="moreEduFieldButtom">+</div>
               <div class="controlEduField btn btn-secondary input-group-text" id="lessEduFieldButtom">-</div>
 
           </div>
 
-          {#Social media#}
-          <div class="form-floating mb-3  input-group-ms mb-3">
-             <div class="md-3 form-label m-4 h3"> <label for="NumSocialFields " id="label" class="h5">How many contact fields do you want to add?</label></div>
-              <p class="NumSocialFields badge bg-secondary p-2" id="NumSocialFields">0</p>
+          {#Experiencia laboral#}
+          <div class="form-floating mb-3  ">
+             <div class="md-3 form-label m-4 h3"> <label for="NumSocialFields " id="label" class="h5">How many fields of education do you want to add?</label></div>
+              {#<p name="pe" class="NumSocialFields badge bg-secondary p-2" id="NumSocialFields">0</p>#}
+
+              <input class="btn btn-info  " type="text" name="NameSocialFields" id="NumSocialFields" value="0"  style="width:50px !important;" readonly>
               <div class="controlEduField btn btn-primary input-group-text" id="moreSocialFieldButtom">+</div>
               <div class="controlEduField btn btn-secondary input-group-text" id="lessSocialFieldButtom">-</div>
           </div>
-
+        <div class=" pt-2">
+            <button id="submitButton" type="submit" class="btn btn-primary mb-3">Confirm User</button>
+        </div>
       </form>
     <script src="/js/profileScript.js"></script>
+
 
 {%  endblock %}

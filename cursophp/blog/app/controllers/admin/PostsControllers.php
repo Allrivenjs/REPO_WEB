@@ -7,16 +7,24 @@ namespace app\controllers\admin;
 use app\controllers\BaseController;
 use app\models\BlogPost;
 use app\models\User;
+use app\services\blogService;
 
 use Sirius\Validation\Validator;
 
 class PostsControllers extends BaseController
 {
+    protected $saveImg;
+//blogService $saveImg
+    public function __construct()
+    {
+        parent::__construct();
+        $this->saveImg = new blogService();
+    }
+
     function getIndex(){
         //admin/posts or admin/posts/index
 
-        
-            $blogPosts = BlogPost::query()->orderBy('id', 'desc')->get();
+            $blogPosts = BlogPost::withTrashed()->orderBy('id', 'desc')->get();
 
 
             return $this->render('admin/posts.twig', [
@@ -26,14 +34,15 @@ class PostsControllers extends BaseController
             ]);
 
 
-
     }
+
     function getCreate(){
         // admin/posts/create
 
             return $this->render('admin/insert-post.twig', ['sesion' => $this->sesion()]);
 
     }
+
     function postCreate(){
         $errors=[];
         $result=false;
@@ -45,7 +54,6 @@ class PostsControllers extends BaseController
 
         $userId = $_SESSION['userId'];
         $user = User::find($userId);
-
         if ($validator->validate($_POST)){
             //admin/posts/create -- posts
             $blogPost = new BlogPost([
@@ -53,17 +61,22 @@ class PostsControllers extends BaseController
                 'content'=>$_POST['content'],
                 'creador'=>$user->name
             ]);
-            if ($_POST['img']){
-                $blogPost->img_url = $_POST['img'];
-            }
+
+            //variables de la imagen
+            $fileName=$_FILES['IMG']['name'];
+            $path='files/ImagesPost/';
+            $imageTemp= $_FILES['IMG']['tmp_name'];
+
+            $imageUploadPath = $path . $fileName;
+            $fileType = pathinfo($imageUploadPath, PATHINFO_EXTENSION);
+
+            $this->saveImg->Saveimg($fileType, $imageTemp, $imageUploadPath,$path);
+            $blogPost->img_url=$imageUploadPath;
             $blogPost->save();
             $result=true;
-
         }else{
             $errors = $validator->getMessages();
         }
-
-
 
         return $this->render('admin/insert-post.twig', [
             'result'=>$result,
@@ -73,48 +86,72 @@ class PostsControllers extends BaseController
     }
 
     function getDelete($id){
-        $blogPosts=BlogPost::where('id',$id)->delete();
+        BlogPost::where('id',$id)->delete();
         header('Location:' . BASE_URL . 'admin/posts');
-
-
     }
 
-    public function getEdit($id) {
+    function getEdit($id) {
 
-        $blogPosts = BlogPost::where('id', $id)->select('title', 'img_url', 'content')->get();
+        $blogPosts = BlogPost::where('id', $id)->select('title', 'content')->get();
 
         return $this->render('admin/insert-post.twig', [
-            'blogPosts' => $blogPosts
+            'blogPosts' => $blogPosts,
+            'sesion'=>$this->sesion()
             ]);
     }
 
-    public function postEdit($id) {
-
-        $errors = [];
-        $result = false;
+    function postEdit($id)
+    {
 
         $validator = new Validator();
         $validator->add('title', 'required');
-        $validator->add('img', 'required');
+
         $validator->add('content', 'required');
 
 
         if ($validator->validate($_POST)) {
 
             $postTitle = $_POST['title'];
-            $postImage = $_POST['img'];
             $postContent = $_POST['content'];
+
+            //variables de la imagen
+            $fileName=$_FILES['IMG']['name'];
+            $path='files/ImagesPost/';
+            $imageTemp= $_FILES['IMG']['tmp_name'];
+
+            $imageUploadPath = $path . $fileName;
+            $fileType = pathinfo($imageUploadPath, PATHINFO_EXTENSION);
+
+            $this->saveImg->Saveimg($fileType, $imageTemp, $imageUploadPath,$path);
+            $postImage= $imageUploadPath;
 
             $blogPosts = BlogPost::where('id', $id)->update(['title' => $postTitle, 'img_url' => $postImage, 'content' => $postContent]);
             $result = true;
+            return $this->render('admin/insert-post.twig', [
+                'blogPosts' => $blogPosts,
+                'result' => $result,
+                'sesion'=>$this->sesion()
+            ]);
+            }else {
+                $errors = $validator->getMessages();
+            return $this->render('admin/insert-post.twig', [
+                'errors' => $errors,
+                'sesion'=>$this->sesion()
+            ]);
+            }
 
-        }else{
-            $errors = $validator->getMessages();
         }
-        return $this->render('admin/insert-post.twig', [
-            'blogPosts' => $blogPosts,
-            'result' => $result,
-            'errors'=> $errors
-        ]);
+
+
+    function getRestore($id){
+        BlogPost::withTrashed()->where('id', $id)->restore();
+        header('Location:' . BASE_URL . 'admin/posts');
     }
+
+    //Para hacer un forsedelet cambiamos el ->restore() por ->forceDelete()
+    /*function getDeleteForce($id){
+        $blogPosts= BlogPost::withTrashed()->where('id', $id)->forceDelete();
+
+        header('Location:' . BASE_URL . 'admin/posts');
+    }*/
 }

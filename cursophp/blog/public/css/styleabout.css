@@ -104,7 +104,7 @@ a:hover {
 }
 
 .card:hover {
-  transform: scale(1.07);
+  transform: scale(1.08);
 }
 .card:hover h1 {
   font-size: 1.5em;

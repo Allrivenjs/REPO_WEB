@@ -44,4 +44,30 @@ class AdminProfilesController extends BaseController
             'sesion'=>$this->sesion(),
         ]);
     }
+
+    function postCreate(){
+
+        $NEducation=$_POST['EduFields'];
+
+        $education=[];
+
+
+        echo "Numero de inputs: ".  $NEducation . " y su nombre es: " . $_POST['name'] ;
+
+        for($i=1;$i<=$NEducation;$i++ ){
+            $Education=$_POST['nEducation'.$i];
+            $education[$i-1]=$Education;
+
+
+
+        }
+        echo "<pre>";
+        print_r($education);
+        echo "</pre>";
+
+
+        return $this->render('Jobs/newPerfil.twig', [
+            'sesion'=>$this->sesion(),
+        ]);
+    }
 }

@@ -9,38 +9,79 @@
 {% block content %}
 
 
-    <h2>NEW USER </h2>
-    {% if errors %}
-        {% include('partials/errors.twig') %}
+    {% if user %}
+        <h2>UPDATE USER </h2>
+        {% if errors %}
+            {% include('partials/errors.twig') %}
+        {% endif %}
+
+        {%  if result %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> your user save!!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {%  endif %}
+        <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
+        {% for row in user %}
+            <form  method="post">
+                <div class="form-floating mb-3">
+                    <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingName" value="{{ row.name }}" >
+                    <label for="floatingName">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="{{ row.email }}">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                {% if edit %}
+
+                {% else %}
+                    <div class="form-floating">
+                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                {% endif %}
+                <div class=" pt-2">
+                    <button type="submit" class="btn btn-primary mb-3">Confirm User</button>
+                </div>
+            </form>
+        {% endfor %}
+    {% else %}
+        <h2>NEW USER </h2>
+        {% if errors %}
+            {% include('partials/errors.twig') %}
+        {% endif %}
+
+        {%  if result %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> your user save!!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {%  endif %}
+        <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
+
+            <form  method="post">
+                <div class="form-floating mb-3">
+                    <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingName" value="{{ row.name }}" >
+                    <label for="floatingName">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="{{ row.email }}">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                {% if edit %}
+
+                {% else %}
+                    <div class="form-floating">
+                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                {% endif %}
+                <div class=" pt-2">
+                    <button type="submit" class="btn btn-primary mb-3">Confirm User</button>
+                </div>
+            </form>
+
     {% endif %}
-
-    {%  if result %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> your user save!!!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {%  endif %}
-    <a class="btn btn-secondary mb-2" href="{{ 'admin/users' | url }}">Back</a>
-
-    <form  method="post">
-        <div class="form-floating mb-3">
-            <input type="text"  name="name" class="form-control" placeholder="Username" id="floatingName" >
-            <label for="floatingName">Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
-
-        <div class=" pt-2">
-            <button type="submit" class="btn btn-primary mb-3">Confirm User</button>
-        </div>
-    </form>
-
 
 
 {%  endblock %}

@@ -25,6 +25,33 @@
         a .material-icons:hover{
             color: blue;
         }
+
+         abbr {
+             position: relative;
+
+
+
+         }
+        abbr[title] {
+            text-decoration: unset;
+            cursor: pointer;
+
+
+
+        }
+
+        abbr:hover::after {
+            position: absolute;
+            bottom: 100%;
+            left: 100%;
+            display: block;
+            padding: 1.4em;
+            border-radius: 15px;
+            background: #00cc66;
+            content: attr(title);
+            z-index: 99;
+
+        }
     </style>
     <title>{% block titleP %}{% endblock %}</title>
 </head>
@@ -60,8 +87,7 @@
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="{{ 'auth/login' | url }}">Login</a>
                     </li>
-                {% endif %}
-                {% if sesion %}
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="{{ 'auth/logout' | url }}">logout</a>
                     </li>
@@ -88,7 +114,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 align-self-center">
             {% block content %}{% endblock %}
         </div>
 

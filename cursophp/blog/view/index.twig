@@ -7,51 +7,19 @@
 {% endblock %}
 {% block content %}
     {% for row in blogPosts  %}
-<div class="list-group p-2">
-        <div class="card" style="width: 39rem;">
+<div class="list-group  p-2" style="align-items: center;">
+        <div class="card " style="width: 40rem;">
             {% if row.img_url %}
             <img src="{{ row.img_url }}" class="card-img-top" alt="...">
            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ row.title }}</h5>
                 <p class="card-text">{{ row.content }}</p>
-                <p>created: {{ row.created_at }} <a href="" class="btn">by {{ row.creador }}</a></p>
+                <div class="position-relative">created: {{ row.created_at }} by {{ row.creador }} <a class="btn btn-info  position-absolute bottom-0 end-0"  href="#">SHOW</a></div>
             </div>
         </div>
 </div>
     {% endfor %}
-{%  endblock %}
-{% block footer  %}
-    <footer>
-        This is a footer <br>
-        <a class="btn btn-secondary" href="{{ 'admin' | url }}">Admin</a>
-    </footer>
-{% endblock %}
-{% block cards %}
-<div class="col-md-4  list-group">
-    <div class="row p-2 ">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row p-2 ">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             {% if page > 1 %}
@@ -78,6 +46,10 @@
 
         </ul>
     </nav>
-{% endblock %}
+{%  endblock %}
+
+
+
+
 
 

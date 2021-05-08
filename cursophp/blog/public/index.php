@@ -105,11 +105,14 @@ $router->group(['before' => 'auth'], function($router){
 
 });
 
+$saveIMG= new \app\services\blogService();
+use \app\controllers\admin\PostsControllers;
 
+$resolver = new PostsControllers($saveIMG);
 
-
-//Muestra de la paguina
+    //Muestra de la paguina
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
 $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'],request_path());
+
 echo $response;
