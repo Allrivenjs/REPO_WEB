@@ -107,6 +107,7 @@
       <path value="$PROJECT_DIR$/applv/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/applv/vendor/laravel/sail" />
       <path value="$PROJECT_DIR$/applv/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/cursophp/blog" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

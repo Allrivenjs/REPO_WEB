@@ -44,6 +44,7 @@ class blogService
                         }
                         else{
                             echo "<script>alert('Error al subir el imagen')</script>";
+                            
                         }
 
                     }
@@ -54,12 +55,13 @@ class blogService
                     }
                     else{
                         echo "<script>alert('Error al subir el archivo')</script>";
+
                     }
                 }
 
         } else {
             echo "<script>alert('El archivo adjunto solo acepta, jpeg jpg y png.')</script>";
-
         }
     }
+
 }

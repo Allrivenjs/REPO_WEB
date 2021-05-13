@@ -10,6 +10,8 @@ $dotenv->load();
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule;
+$container = new DI\Container();
+
 
 $capsule->addConnection([
     'driver'    => 'mysql',
@@ -105,14 +107,19 @@ $router->group(['before' => 'auth'], function($router){
 
 });
 
-$saveIMG= new \app\services\blogService();
-use \app\controllers\admin\PostsControllers;
 
-$resolver = new PostsControllers($saveIMG);
 
     //Muestra de la paguina
-$dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
-
-$response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'],request_path());
-
-echo $response;
+try{
+    $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
+    $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'],request_path());
+    echo $response;
+}catch (Exception $e){
+    $emitter = new \Zend\Diactoros\Response\SapiEmitter();
+    $respons= new Zend\Diactoros\Response\EmptyResponse(400);
+    $emitter->emit($respons);
+} catch (Error $e){
+    $emitter = new \Zend\Diactoros\Response\SapiEmitter();
+    $respons= new Zend\Diactoros\Response\EmptyResponse(500);
+    $emitter->emit($respons);
+}
